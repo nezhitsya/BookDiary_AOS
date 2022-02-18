@@ -2,7 +2,6 @@ package com.nezhitsya.book.fragment
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.Html
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +14,7 @@ import com.nezhitsya.book.R
 import com.nezhitsya.book.adapter.SearchAdapter
 import com.nezhitsya.book.api.NetworkService
 import com.nezhitsya.book.model.APIResult
+import com.nezhitsya.book.utils.StripHTML.Companion.stripHtmlTag
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,10 +78,10 @@ class SearchFragment : Fragment() {
         adapter.setItemClickListener { item ->
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, BookDetailFragment().apply {
                 arguments = bundle.apply {
-                    putString("title", stripHTML(item.title))
-                    putString("author", stripHTML(item.author))
-                    putString("image", stripHTML(item.image))
-                    putString("description", stripHTML(item.description))
+                    putString("title", stripHtmlTag(item.title))
+                    putString("author", stripHtmlTag(item.author))
+                    putString("image", stripHtmlTag(item.image))
+                    putString("description", stripHtmlTag(item.description))
                 }
             }).addToBackStack(null).commit()
         }
@@ -110,7 +110,7 @@ class SearchFragment : Fragment() {
         })
     }
 
-    private fun stripHTML(html: String): String {
-        return Html.fromHtml(html).toString()
-    }
+//    private fun stripHTML(html: String): String {
+//        return Html.fromHtml(html).toString()
+//    }
 }

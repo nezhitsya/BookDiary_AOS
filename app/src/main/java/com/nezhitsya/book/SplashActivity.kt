@@ -5,10 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.ktx.Firebase
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
+import com.google.firebase.database.FirebaseDatabase
+
+
+
 
 class SplashActivity : AppCompatActivity() {
 
@@ -40,6 +45,8 @@ class SplashActivity : AppCompatActivity() {
     private fun init() {
         firebaseAuth.signInAnonymously().addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
+                FirebaseDatabase.getInstance().reference.child("Users")
+                    .child(firebaseAuth.getCurrentUser()!!.getUid()).child("uid").setValue(firebaseAuth.getCurrentUser()!!.getUid())
                 main()
             }
         }
