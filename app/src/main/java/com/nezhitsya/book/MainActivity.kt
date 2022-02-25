@@ -3,17 +3,27 @@ package com.nezhitsya.book
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.ViewModelProvider
 import com.nezhitsya.book.fragment.HomeFragment
 import com.nezhitsya.book.fragment.SearchFragment
+import com.nezhitsya.book.model.Users
+import com.nezhitsya.book.viewModel.MainViewModel
+import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.home_include_drawer.*
 import kotlinx.android.synthetic.main.toolbar_item.*
 
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_include_drawer)
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         drawer.setOnClickListener {
             home_drawer_layout.openDrawer((GravityCompat.START))
@@ -28,5 +38,12 @@ class MainActivity : AppCompatActivity() {
             home_drawer_layout.closeDrawer((GravityCompat.START))
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, SearchFragment()).addToBackStack(null).commit()
         }
+
+        getProfile()
     }
+
+    private fun getProfile() {
+        viewModel.getProfile()
+    }
+
 }
