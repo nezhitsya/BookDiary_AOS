@@ -2,12 +2,13 @@ package com.nezhitsya.book
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.nezhitsya.book.fragment.HomeFragment
 import com.nezhitsya.book.fragment.SearchFragment
-import com.nezhitsya.book.model.Users
 import com.nezhitsya.book.viewModel.MainViewModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.home_include_drawer.*
 import kotlinx.android.synthetic.main.toolbar_item.*
@@ -43,7 +44,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getProfile() {
-        viewModel.getProfile()
+        viewModel.getProfile().observe(this, {
+            nickname.text = it.nickname.toString()
+            Picasso.get().load(it.profileImage).into(profile)
+        })
     }
 
 }

@@ -9,23 +9,24 @@ import com.nezhitsya.book.model.Users
 
 class MainViewModel: ViewModel() {
 
-    private var liveUserData = MutableLiveData<Users?>()
     lateinit var firebaseUser: FirebaseUser
     lateinit var ref: DatabaseReference
+    lateinit var user: Users
 
-    fun getProfile() {
+    fun getProfile(): MutableLiveData<Users> {
+        val liveUserData = MutableLiveData<Users>()
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
         ref = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.uid)
 
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val user: Users? = snapshot.getValue(Users::class.java)
-                liveUserData.postValue(user)
+        ref.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val result = task.result
+                result?.let {
+                    user = it.getValue(Users::class.java)!!
+                }
             }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
+            liveUserData.value = user
+        }
+        return liveUserData
     }
 }
