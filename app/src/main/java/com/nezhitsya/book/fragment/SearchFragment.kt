@@ -110,7 +110,4 @@ class SearchFragment : Fragment() {
         })
     }
 
-//    private fun stripHTML(html: String): String {
-//        return Html.fromHtml(html).toString()
-//    }
 }

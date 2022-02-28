@@ -4,5 +4,6 @@
     <color name="colorBlack">#FF000000</color>
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="colorGray">#AEAEAE</color>
+    <color name="colorGreen">#064635</color>
     <color name="trans">#002196F3</color>
 </resources>

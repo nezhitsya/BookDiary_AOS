@@ -2,7 +2,6 @@ package com.nezhitsya.book
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.nezhitsya.book.fragment.HomeFragment
@@ -12,7 +11,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.drawer_header.*
 import kotlinx.android.synthetic.main.home_include_drawer.*
 import kotlinx.android.synthetic.main.toolbar_item.*
-
 
 class MainActivity : AppCompatActivity() {
 
