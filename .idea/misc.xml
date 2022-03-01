@@ -12,11 +12,11 @@
         <entry key="app/src/main/res/layout/blank_fragment.xml" value="0.19655797101449277" />
         <entry key="app/src/main/res/layout/calendar_item.xml" value="0.28500539107527156" />
         <entry key="app/src/main/res/layout/drawer_header.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_book_detail.xml" value="0.3795249644679677" />
+        <entry key="app/src/main/res/layout/fragment_book_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.25202097702170134" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.22418478260869565" />
-        <entry key="app/src/main/res/layout/fragment_write.xml" value="0.19655797101449277" />
+        <entry key="app/src/main/res/layout/fragment_write.xml" value="0.22730706545553958" />
         <entry key="app/src/main/res/layout/home_drawer_layout.xml" value="0.2269021739130435" />
         <entry key="app/src/main/res/layout/home_include_drawer.xml" value="0.1507474301515621" />
         <entry key="app/src/main/res/layout/search_item.xml" value="0.2246376811594203" />

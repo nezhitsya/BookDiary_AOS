@@ -1,5 +1,6 @@
 package com.nezhitsya.book.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,8 +10,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.nezhitsya.book.R
 import com.squareup.picasso.Picasso
+import android.content.DialogInterface
+
+import com.google.firebase.database.FirebaseDatabase
+
+import android.widget.LinearLayout
+
+import android.widget.EditText
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class BookDetailFragment : Fragment() {
+
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +35,7 @@ class BookDetailFragment : Fragment() {
         var author: TextView = view.findViewById(R.id.author)
         var description: TextView = view.findViewById(R.id.description)
         var write: TextView = view.findViewById(R.id.write_btn)
+        var comment: TextView = view.findViewById(R.id.comment_btn)
 
         Picasso.get().load(requireArguments().getString("image")).into(image)
         title.text = requireArguments().getString("title")
@@ -33,7 +46,41 @@ class BookDetailFragment : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WriteFragment()).addToBackStack(null).commit()
         }
 
+        comment.setOnClickListener {
+            writeComment(requireArguments().getString("title").toString())
+        }
+
+        recyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView.setHasFixedSize(true)
+        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.reverseLayout = true
+        linearLayoutManager.stackFromEnd = true
+        recyclerView.layoutManager = linearLayoutManager
+
         return view
+    }
+
+    private fun writeComment(title: String) {
+        val dialog: AlertDialog.Builder = AlertDialog.Builder(context)
+        dialog.setTitle("한줄평 남기기")
+
+        val editText = EditText(context)
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.MATCH_PARENT
+        )
+        editText.layoutParams = lp
+        dialog.setView(editText)
+
+        dialog.setPositiveButton("작성하기") { dialog, which ->
+            val hashMap: HashMap<String, Any> = HashMap()
+            hashMap["comment"] = editText.text.toString()
+            FirebaseDatabase.getInstance().getReference("Comments").child(title).setValue(hashMap)
+        }
+        dialog.setNegativeButton("취소하기") { dialog, which ->
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
 }
