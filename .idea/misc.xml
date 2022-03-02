@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.20697463768115942" />
         <entry key="app/src/main/res/layout/blank_fragment.xml" value="0.19655797101449277" />
         <entry key="app/src/main/res/layout/calendar_item.xml" value="0.28500539107527156" />
+        <entry key="app/src/main/res/layout/comment_item.xml" value="0.32386348098472106" />
         <entry key="app/src/main/res/layout/drawer_header.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_book_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.25202097702170134" />

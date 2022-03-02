@@ -17,12 +17,15 @@ import com.google.firebase.database.FirebaseDatabase
 import android.widget.LinearLayout
 
 import android.widget.EditText
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.nezhitsya.book.viewModel.BookDetailViewModel
 
 class BookDetailFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var viewModel: BookDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,12 +53,17 @@ class BookDetailFragment : Fragment() {
             writeComment(requireArguments().getString("title").toString())
         }
 
+        viewModel = ViewModelProvider(this).get(BookDetailViewModel::class.java)
+
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.setHasFixedSize(true)
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.reverseLayout = true
         linearLayoutManager.stackFromEnd = true
         recyclerView.layoutManager = linearLayoutManager
+
+        viewModel.getComment(requireArguments().getString("title").toString(),
+            requireContext(), recyclerView)
 
         return view
     }
@@ -73,9 +81,7 @@ class BookDetailFragment : Fragment() {
         dialog.setView(editText)
 
         dialog.setPositiveButton("작성하기") { dialog, which ->
-            val hashMap: HashMap<String, Any> = HashMap()
-            hashMap["comment"] = editText.text.toString()
-            FirebaseDatabase.getInstance().getReference("Comments").child(title).setValue(hashMap)
+            viewModel.writeComment(title, editText.text.toString())
         }
         dialog.setNegativeButton("취소하기") { dialog, which ->
             dialog.dismiss()
