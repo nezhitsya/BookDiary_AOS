@@ -43,8 +43,9 @@ class CalendarAdapter(val context: Context, val calendarLayout: LinearLayout, va
         holder?.bind(dataList[position], position, context)
 
         if (itemClick != null) {
-            holder?.itemView?.setOnClickListener { view ->
-                itemClick?.onClick(view, position)
+            holder?.itemView?.setOnClickListener {
+                val fragment = (context as MainActivity).supportFragmentManager.beginTransaction()
+                fragment.replace(R.id.fragment_container, SearchFragment()).addToBackStack(null).commit()
             }
         }
     }
@@ -73,11 +74,6 @@ class CalendarAdapter(val context: Context, val calendarLayout: LinearLayout, va
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     day!!.setTextAppearance(R.style.LightColorTextViewStyle)
                 }
-            }
-
-            itemView.setOnClickListener {
-                val fragment = (context as MainActivity).supportFragmentManager.beginTransaction()
-                fragment.replace(R.id.fragment_container, SearchFragment()).addToBackStack(null).commit()
             }
         }
     }

@@ -15,12 +15,27 @@
             android:layout_height="match_parent">
 
             <EditText
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:hint="title"
+                android:hint="제목"
+                android:textSize="13dp"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
                 android:maxLines="1"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:textSize="11dp"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:hint="독후감"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -38,11 +53,20 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:id="@+id/photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/ic_photo"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp" />
+            android:padding="10dp" />
+
+        <ImageView
+            android:id="@+id/save"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_save"
+            android:layout_gravity="right"
+            android:padding="10dp" />
 
     </androidx.cardview.widget.CardView>
 
