@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, SearchFragment()).addToBackStack(null).commit()
         }
 
+        nav_diary.setOnClickListener {
+            home_drawer_layout.closeDrawer((GravityCompat.START))
+        }
+
         getProfile()
     }
 

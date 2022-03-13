@@ -69,6 +69,19 @@
                     android:textSize="18sp"
                     android:textColor="@color/colorBlack"/>
 
+                <Button
+                    android:id="@+id/nav_diary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:drawableLeft="@drawable/ic_diary"
+                    android:gravity="center_vertical"
+                    android:text="    나의 책 일기"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorBlack"/>
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
