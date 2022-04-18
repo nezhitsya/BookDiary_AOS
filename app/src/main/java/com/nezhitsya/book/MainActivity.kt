@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.nezhitsya.book.fragment.HomeFragment
+import com.nezhitsya.book.fragment.MyDiaryFragment
 import com.nezhitsya.book.fragment.SearchFragment
 import com.nezhitsya.book.viewModel.MainViewModel
 import com.squareup.picasso.Picasso
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         nav_diary.setOnClickListener {
             home_drawer_layout.closeDrawer((GravityCompat.START))
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, MyDiaryFragment()).addToBackStack(null).commit()
         }
 
         getProfile()

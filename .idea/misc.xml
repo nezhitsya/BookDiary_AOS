@@ -11,15 +11,17 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.20697463768115942" />
         <entry key="app/src/main/res/layout/blank_fragment.xml" value="0.19655797101449277" />
         <entry key="app/src/main/res/layout/calendar_item.xml" value="0.28500539107527156" />
-        <entry key="app/src/main/res/layout/comment_item.xml" value="0.32386348098472106" />
+        <entry key="app/src/main/res/layout/comment_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/diary_item.xml" value="0.2078804347826087" />
         <entry key="app/src/main/res/layout/drawer_header.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_book_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.25202097702170134" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_my_diary.xml" value="0.2078804347826087" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/fragment_write.xml" value="0.22730706545553958" />
         <entry key="app/src/main/res/layout/home_drawer_layout.xml" value="0.2269021739130435" />
-        <entry key="app/src/main/res/layout/home_include_drawer.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/home_include_drawer.xml" value="0.2085738779092683" />
         <entry key="app/src/main/res/layout/search_item.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/toolbar_item.xml" value="0.2296195652173913" />
       </map>

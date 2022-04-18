@@ -78,7 +78,7 @@
                     android:layout_marginEnd="20dp"
                     android:drawableLeft="@drawable/ic_diary"
                     android:gravity="center_vertical"
-                    android:text="    나의 책 일기"
+                    android:text="    나의 독후감"
                     android:textSize="18sp"
                     android:textColor="@color/colorBlack"/>
 

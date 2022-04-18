@@ -41,33 +41,4 @@
 
     </ScrollView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <ImageView
-            android:id="@+id/photo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_photo"
-            android:layout_gravity="center_horizontal"
-            android:padding="10dp" />
-
-        <ImageView
-            android:id="@+id/save"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_save"
-            android:layout_gravity="right"
-            android:padding="10dp" />
-
-    </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
