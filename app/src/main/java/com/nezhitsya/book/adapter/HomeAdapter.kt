@@ -14,7 +14,6 @@ class HomeAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(frag
     }
 
     override fun createFragment(position: Int): Fragment {
-        val calendarFragment = CalendarFragment(position)
-        return calendarFragment
+        return CalendarFragment(position)
     }
 }

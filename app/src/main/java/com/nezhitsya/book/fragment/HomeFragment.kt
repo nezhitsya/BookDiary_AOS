@@ -14,12 +14,10 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
 
-    lateinit var mContext: Context
-    lateinit var calendarViewPager: ViewPager2
+    private lateinit var mContext: Context
+    private lateinit var calendarViewPager: ViewPager2
 
-    companion object {
-        var instance: HomeFragment? = null
-    }
+    private var instance: HomeFragment? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,8 +35,8 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        var view: View = inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        val view: View = inflater.inflate(R.layout.fragment_home, container, false)
 
         calendarViewPager = view.calendarViewPager
 
@@ -50,7 +48,7 @@ class HomeFragment : Fragment() {
         initView()
     }
 
-    fun initView() {
+    private fun initView() {
         val homeAdapter = HomeAdapter(requireActivity())
         calendarViewPager.adapter = homeAdapter
         calendarViewPager.orientation = ViewPager2.ORIENTATION_VERTICAL

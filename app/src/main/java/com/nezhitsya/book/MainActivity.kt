@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         drawer.setOnClickListener {
             home_drawer_layout.openDrawer((GravityCompat.START))

@@ -18,19 +18,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class CalendarFragment(index: Int) : Fragment() {
-    lateinit var mContext: Context
-    lateinit var mActivity: MainActivity
-    lateinit var currentDate: Date
-    lateinit var yearmonthText: TextView
-    lateinit var calendarLayout: LinearLayout
-    lateinit var calendarView: RecyclerView
-    lateinit var calendarAdapter: CalendarAdapter
+    private lateinit var mContext: Context
+    private lateinit var mActivity: MainActivity
+    private lateinit var currentDate: Date
+    private lateinit var yearmonthText: TextView
+    private lateinit var calendarLayout: LinearLayout
+    private lateinit var calendarView: RecyclerView
+    private lateinit var calendarAdapter: CalendarAdapter
 
-    var pageIndex = index
-
-    companion object {
-        var instance: CalendarFragment? = null
-    }
+    private var pageIndex = index
+    private var instance: CalendarFragment? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,8 +46,8 @@ class CalendarFragment(index: Int) : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        var view: View = inflater.inflate(R.layout.fragment_calendar, container, false)
+    ): View {
+        val view: View = inflater.inflate(R.layout.fragment_calendar, container, false)
 
         initView(view)
         initCalendar()
@@ -58,11 +55,7 @@ class CalendarFragment(index: Int) : Fragment() {
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
-    fun initView(view: View) {
+    private fun initView(view: View) {
         pageIndex -= (Int.MAX_VALUE / 2)
 
         yearmonthText = view.year_month_text
@@ -75,11 +68,11 @@ class CalendarFragment(index: Int) : Fragment() {
         }
         currentDate = date
 
-        var dateTime: String = SimpleDateFormat(mContext.getString(R.string.calendar_year_month_format), Locale.KOREA).format(date.time)
-        yearmonthText.setText(dateTime)
+        val dateTime: String = SimpleDateFormat(mContext.getString(R.string.calendar_year_month_format), Locale.KOREA).format(date.time)
+        yearmonthText.text = dateTime
     }
 
-    fun initCalendar() {
+    private fun initCalendar() {
         calendarAdapter = CalendarAdapter(mContext, calendarLayout, currentDate)
         calendarView.adapter = calendarAdapter
         calendarView.layoutManager = GridLayoutManager(mContext, 7, GridLayoutManager.VERTICAL, false)

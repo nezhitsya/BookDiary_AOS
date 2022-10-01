@@ -1,5 +1,6 @@
 package com.nezhitsya.book.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,14 +18,14 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAdapter.Holder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.search_item, parent, false)
         return Holder(view).also {
-            it.itemView.setOnClickListener { position ->
+            it.itemView.setOnClickListener { _ ->
                 callback(items[it.adapterPosition])
             }
         }
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(items[position])
+        holder.bind(items[position])
     }
 
 
@@ -33,7 +34,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.Holder>() {
     }
 
     inner class Holder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
-        var coverImage = itemView?.findViewById<ImageView>(R.id.cover_image)
+        private var coverImage = itemView?.findViewById<ImageView>(R.id.cover_image)
 
         fun bind(book: Books) {
             with(book) {
@@ -42,6 +43,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.Holder>() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: List<Books>) {
         this.items.addAll(items)
         notifyDataSetChanged()
@@ -51,6 +53,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.Holder>() {
         this.callback = callback
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun clear() {
         this.items.clear()
         notifyDataSetChanged()

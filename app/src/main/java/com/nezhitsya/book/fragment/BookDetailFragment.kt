@@ -10,9 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.nezhitsya.book.R
 import com.squareup.picasso.Picasso
-import android.content.DialogInterface
-
-import com.google.firebase.database.FirebaseDatabase
 
 import android.widget.LinearLayout
 
@@ -30,15 +27,15 @@ class BookDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        var view: View = inflater.inflate(R.layout.fragment_book_detail, container, false)
+    ): View {
+        val view: View = inflater.inflate(R.layout.fragment_book_detail, container, false)
 
-        var image: ImageView = view.findViewById(R.id.cover_image)
-        var title: TextView = view.findViewById(R.id.title)
-        var author: TextView = view.findViewById(R.id.author)
-        var description: TextView = view.findViewById(R.id.description)
-        var write: TextView = view.findViewById(R.id.write_btn)
-        var comment: TextView = view.findViewById(R.id.comment_btn)
+        val image: ImageView = view.findViewById(R.id.cover_image)
+        val title: TextView = view.findViewById(R.id.title)
+        val author: TextView = view.findViewById(R.id.author)
+        val description: TextView = view.findViewById(R.id.description)
+        val write: TextView = view.findViewById(R.id.write_btn)
+        val comment: TextView = view.findViewById(R.id.comment_btn)
 
         Picasso.get().load(requireArguments().getString("image")).into(image)
         title.text = requireArguments().getString("title")
@@ -53,7 +50,7 @@ class BookDetailFragment : Fragment() {
             writeComment(requireArguments().getString("title").toString())
         }
 
-        viewModel = ViewModelProvider(this).get(BookDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this)[BookDetailViewModel::class.java]
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.setHasFixedSize(true)
@@ -80,10 +77,10 @@ class BookDetailFragment : Fragment() {
         editText.layoutParams = lp
         dialog.setView(editText)
 
-        dialog.setPositiveButton("작성하기") { dialog, which ->
+        dialog.setPositiveButton("작성하기") { _, _ ->
             viewModel.writeComment(title, editText.text.toString())
         }
-        dialog.setNegativeButton("취소하기") { dialog, which ->
+        dialog.setNegativeButton("취소하기") { dialog, _ ->
             dialog.dismiss()
         }
         dialog.show()

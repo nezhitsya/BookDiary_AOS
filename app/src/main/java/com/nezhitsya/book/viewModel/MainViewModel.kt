@@ -9,9 +9,9 @@ import com.nezhitsya.book.model.Users
 
 class MainViewModel: ViewModel() {
 
-    lateinit var firebaseUser: FirebaseUser
-    lateinit var ref: DatabaseReference
-    lateinit var user: Users
+    private lateinit var firebaseUser: FirebaseUser
+    private lateinit var ref: DatabaseReference
+    private lateinit var user: Users
 
     fun getProfile(): MutableLiveData<Users> {
         val liveUserData = MutableLiveData<Users>()

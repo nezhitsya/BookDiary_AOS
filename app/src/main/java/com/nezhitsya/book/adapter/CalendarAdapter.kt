@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CalendarAdapter(val context: Context, val calendarLayout: LinearLayout, val date: Date): RecyclerView.Adapter<CalendarAdapter.Holder>() {
+class CalendarAdapter(val context: Context, private val calendarLayout: LinearLayout, private val date: Date): RecyclerView.Adapter<CalendarAdapter.Holder>() {
     var dataList: ArrayList<Int> = arrayListOf()
     var itemClick: ItemClick? = null
     var calendarDate: CalendarDate = CalendarDate(date)
@@ -40,10 +40,10 @@ class CalendarAdapter(val context: Context, val calendarLayout: LinearLayout, va
         val height = calendarLayout.height / 6
         holder.itemView.layoutParams.height = height
 
-        holder?.bind(dataList[position], position, context)
+        holder.bind(dataList[position], position, context)
 
         if (itemClick != null) {
-            holder?.itemView?.setOnClickListener {
+            holder.itemView.setOnClickListener {
                 val fragment = (context as MainActivity).supportFragmentManager.beginTransaction()
                 fragment.replace(R.id.fragment_container, SearchFragment()).addToBackStack(null).commit()
             }
@@ -62,10 +62,10 @@ class CalendarAdapter(val context: Context, val calendarLayout: LinearLayout, va
         fun bind(date: Int, position: Int, context: Context) {
             val firstDateIndex = calendarDate.prevTail
             val lastDateIndex = dataList.size - calendarDate.nextHead - 1
-            day!!.setText(date.toString())
+            day!!.text = date.toString()
 
-            var dateString: String = SimpleDateFormat("dd", Locale.KOREA).format(date)
-            var dateInt = dateString.toInt()
+            val dateString: String = SimpleDateFormat("dd", Locale.KOREA).format(date)
+            val dateInt = dateString.toInt()
             if (dataList[position] == dateInt) {
                 day!!.setTypeface(day!!.typeface, Typeface.BOLD)
             }

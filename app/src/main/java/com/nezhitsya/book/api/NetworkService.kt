@@ -7,8 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetworkService {
 
     private const val NAVER_API_URL = "https://openapi.naver.com/"
-    val clientID = "F7osXKqVTEE6Bq_djoBM"
-    val clientSecret = "zvhQ_5Jt0C"
+    private const val clientID = "F7osXKqVTEE6Bq_djoBM"
+    private const val clientSecret = "zvhQ_5Jt0C"
 
     private val okHttpClient = OkHttpClient.Builder()
         .addNetworkInterceptor {

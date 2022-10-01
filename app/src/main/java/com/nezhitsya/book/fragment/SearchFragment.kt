@@ -18,6 +18,7 @@ import com.nezhitsya.book.utils.StripHTML.Companion.stripHtmlTag
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class SearchFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -31,11 +32,11 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        var view: View = inflater.inflate(R.layout.fragment_search, container, false)
+    ): View {
+        val view: View = inflater.inflate(R.layout.fragment_search, container, false)
 
-        var bundle = Bundle()
-        var search: EditText = view.findViewById(R.id.search_bar)
+        val bundle = Bundle()
+        val search: EditText = view.findViewById(R.id.search_bar)
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.setHasFixedSize(true)
@@ -49,7 +50,11 @@ class SearchFragment : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 adapter.clear()
-                searchBook(s.toString().toLowerCase(), startResult, display)
+                searchBook(
+                    s.toString().lowercase(Locale.getDefault()),
+                    startResult,
+                    display
+                )
 
                 recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -60,7 +65,11 @@ class SearchFragment : Fragment() {
 
                         if (!recyclerView.canScrollVertically(1) && lastItemPosition == itemTotalCount) {
                             if (adapter.itemCount < total) {
-                                searchBook(s.toString().toLowerCase(), ++startResult * 10, display)
+                                searchBook(
+                                    s.toString().lowercase(Locale.getDefault()),
+                                    ++startResult * 10,
+                                    display
+                                )
                             }
                         }
                     }
@@ -96,10 +105,10 @@ class SearchFragment : Fragment() {
             override fun onResponse(call: Call<APIResult>, response: Response<APIResult>) {
                 with(response) {
                     val body = body()
-                    total = body!!.total
+                    total = body?.total ?: 0
 
-                    if (isSuccessful && body != null) {
-                        body.items.let { adapter.setItems(it) }
+                    if (isSuccessful) {
+                        body!!.items.let { adapter.setItems(it) }
                     }
                 }
             }
