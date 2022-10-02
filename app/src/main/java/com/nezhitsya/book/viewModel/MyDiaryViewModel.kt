@@ -2,6 +2,7 @@ package com.nezhitsya.book.viewModel
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -9,13 +10,13 @@ import com.google.firebase.database.*
 import com.nezhitsya.book.adapter.MyDiaryAdapter
 import com.nezhitsya.book.model.Diary
 
-class MyDiaryViewModel {
+class MyDiaryViewModel: ViewModel() {
 
     lateinit var firebaseUser: FirebaseUser
     private val reference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Diary")
     var diaryList = arrayListOf<Diary>()
 
-    fun getDiary(title: String, context: Context, recyclerView: RecyclerView) {
+    fun getDiary(context: Context, recyclerView: RecyclerView) {
 
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
         reference.child(firebaseUser.uid).addValueEventListener(object: ValueEventListener {
