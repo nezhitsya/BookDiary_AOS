@@ -15,19 +15,18 @@ import com.squareup.picasso.Picasso
 class MyDiaryAdapter(val context: Context, private val diaryList: ArrayList<Diary>): RecyclerView.Adapter<MyDiaryAdapter.Holder>() {
 
     private lateinit var callback: (Diary) -> Unit
-    private val items: ArrayList<Diary> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyDiaryAdapter.Holder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.diary_item, parent, false)
         return Holder(view).also {
             it.itemView.setOnClickListener { _ ->
-                callback(items[it.adapterPosition])
+                callback(diaryList[it.adapterPosition])
             }
         }
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(items[position], context)
+        holder.bind(diaryList[position], context)
     }
 
     override fun getItemCount(): Int {

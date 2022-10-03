@@ -12,7 +12,7 @@ class WriteViewModel: ViewModel() {
     lateinit var ref: DatabaseReference
     lateinit var diaryId: String
 
-    fun writeDiary(title: String, desc: String) {
+    fun writeDiary(title: String, image: String, desc: String, year: Int, month: Int, day: Int, star: Int) {
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
         ref = FirebaseDatabase.getInstance().getReference("Diary")
         diaryId = ref.push().key.toString()
@@ -21,8 +21,14 @@ class WriteViewModel: ViewModel() {
         hashMap["publisher"] = firebaseUser.uid
         hashMap["diaryid"] = diaryId
         hashMap["title"] = title
+        hashMap["image"] = image
         hashMap["desc"] = desc
+        hashMap["year"] = year
+        hashMap["month"] = month
+        hashMap["day"] = day
+        hashMap["star"] = star
 
-        ref.child(diaryId).updateChildren(hashMap)
+        ref.child(firebaseUser.uid).child(diaryId).updateChildren(hashMap)
     }
+
 }

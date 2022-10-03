@@ -30,6 +30,8 @@ class BookDetailFragment : Fragment() {
     ): View {
         val view: View = inflater.inflate(R.layout.fragment_book_detail, container, false)
 
+        val bundle = Bundle()
+
         val image: ImageView = view.findViewById(R.id.cover_image)
         val title: TextView = view.findViewById(R.id.title)
         val author: TextView = view.findViewById(R.id.author)
@@ -37,13 +39,19 @@ class BookDetailFragment : Fragment() {
         val write: TextView = view.findViewById(R.id.write_btn)
         val comment: TextView = view.findViewById(R.id.comment_btn)
 
-        Picasso.get().load(requireArguments().getString("image")).into(image)
+        val imageUrl = requireArguments().getString("image")
+        Picasso.get().load(imageUrl).into(image)
         title.text = requireArguments().getString("title")
         author.text = requireArguments().getString("author")
         description.text = requireArguments().getString("description")
 
         write.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WriteFragment()).addToBackStack(null).commit()
+            requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WriteFragment().apply {
+                arguments = bundle.apply {
+                    putString("title", title.text.toString())
+                    putString("image", imageUrl)
+                }
+            }).addToBackStack(null).commit()
         }
 
         comment.setOnClickListener {
