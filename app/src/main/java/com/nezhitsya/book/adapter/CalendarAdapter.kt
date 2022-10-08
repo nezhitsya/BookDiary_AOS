@@ -75,8 +75,6 @@ class CalendarAdapter(val context: Context, private val calendarLayout: LinearLa
             val lastDateIndex = dataList.size - calendarDate.nextHead - 1
             day!!.text = date.toString()
 
-            val dateString: String = SimpleDateFormat("dd", Locale.KOREA).format(date)
-            val dateInt = dateString.toInt()
             if (dataList[position] == date) {
                 day!!.setTypeface(day!!.typeface, Typeface.BOLD)
             }
@@ -103,8 +101,10 @@ class CalendarAdapter(val context: Context, private val calendarLayout: LinearLa
                     val monthInt: Int = calendarDate.calendar.get(Calendar.MONTH) + 1
 
                     for (i in diaryList) {
-                        if (i.year == yearInt && i.month == monthInt && dataList[position] == dateInt) {
-                            Picasso.get().load(i.image).into(coverImage)
+                        if (i.year == yearInt && i.month == monthInt && i.day == dataList[position]) {
+                            if (position >= firstDateIndex || position <= lastDateIndex) {
+                                Picasso.get().load(i.image).into(coverImage)
+                            }
                         }
                     }
                 }
